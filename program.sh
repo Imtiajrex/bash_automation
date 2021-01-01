@@ -1,21 +1,20 @@
 #!/bin/bash
 #read project
+user="imtiajrex"
 if [[ $1 = "school" ]]
 then
-    php '/mnt/Fast Projects/Web/school_backend/artisan' serve &
-
+    su -c "php '/mnt/Fast Projects/Web/school_backend/artisan' serve &" $user
+    
     /opt/lampp/lampp start &
 
 
-    code '/mnt/Fast Projects/Web/school_argon/' &
-    code '/mnt/Fast Projects/Web/school_backend/' &
+    su -c "code '/mnt/Fast Projects/Web/school_argon/' &" $user
+    su -c "code '/mnt/Fast Projects/Web/school_backend/' &" $user
 
-    npm start --prefix '/mnt/Fast Projects/Web/school_argon/' &
+    su -c "npm start --prefix '/mnt/Fast Projects/Web/school_argon/' &" $user
 
-    clear
-    disown & exit
 else
     echo "Not Valid Project!"
 fi
 
-exit
+disown & exit
